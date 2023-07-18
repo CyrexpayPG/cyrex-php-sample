@@ -5,7 +5,7 @@ try {
     $curl = curl_init();
     
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://dapi.cyrexpay.com/payment/v1/checkout',
+        CURLOPT_URL => 'https://api.cyrexpay.com/payment/v1/checkout',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -15,7 +15,7 @@ try {
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $post_raw,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: sk_cultureland',
+            'Authorization: sk_real_cultureland',
             'Content-Type: application/json'
         ),
     ));
