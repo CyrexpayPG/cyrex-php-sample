@@ -1,5 +1,10 @@
-# PHP Starter
+# PHP 결제 샘플
 
-Quickly get started with [PHP](https://www.php.net/) using this starter! PHP is a popular general-purpose scripting language that is especially suited to web development.
+# 결제 순서
 
-This starter starts a PHP web server on [localhost:8080](http://localhost:8080).
+1. [index.php] 화면에서 결제 정보(JSON)를 생성합니다.
+- ajax 통신으로 [checkout.php]으로 데이터를 전송합니다.
+
+2. [checkout.php] backend 에서 checkout 요청을 보내 페이지 링크를 가져옵니다.
+
+3. 
