@@ -15,7 +15,7 @@ try {
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $post_raw,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: sk_real_cultureland',
+            'Authorization: sk_real_culturecash',
             'Content-Type: application/json'
         ),
     ));

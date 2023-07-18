@@ -57,7 +57,7 @@
             request.amount = Number(document.getElementById('amount-tag').value);
             request.products[0].price = request.amount;
             
-            document.getElementById('request-tag').innerHTML = JSON.stringify(request,null,2);
+            //document.getElementById('request-tag').innerHTML = JSON.stringify(request,null,2);
             
             alert('결제창 요청');
             
