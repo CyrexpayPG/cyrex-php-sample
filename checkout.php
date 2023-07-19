@@ -1,11 +1,17 @@
 <?php
 $post_raw = file_get_contents('php://input');
-// $post_data = json_decode($post_raw);
 try {
+    $post_data = json_decode($post_raw);
     $curl = curl_init();
+    $configVars = parse_ini_file('config.ini', TRUE);
+    $domain = $configVars['basic']['domain'];
+    $directMethod = $post_data->directMethod;
+    $cookieName = $post_data->trackId;
+    setcookie($cookieName, $directMethod, time() + 3600);
+    $sk = $configVars['basic']['sk_'.$directMethod];
     
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://dapi.cyrexpay.com/payment/v1/checkout',
+        CURLOPT_URL => $domain.'/payment/v1/checkout',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -15,7 +21,7 @@ try {
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => $post_raw,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: sk_real_culturecash',
+            'Authorization: '.$sk,
             'Content-Type: application/json'
         ),
     ));
@@ -25,6 +31,6 @@ try {
 
     echo $response;
 } catch (\Throwable $th) {
-    echo 'ERROR';
+    echo '{"error": "통신장애"}';
 }
 ?>

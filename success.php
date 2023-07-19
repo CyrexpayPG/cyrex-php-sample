@@ -1,12 +1,46 @@
-<?php
-echo 'into success ';
-$result = $_GET['result'];
-echo $result;
-$trackId = $_GET['trackId'];
-echo $trackId;
-$accToken = $_GET['token'];
-echo $accToken;
-$trxId = $_GET['trxId'];
-echo $trxId;
+<html>
 
+<?php
+echo '<h1>[가맹점] 결제 성공 페이지</h1>';
+$result = $_GET['result'];
+$trackId = $_GET['trackId'];
+$token = $_GET['token'];
+$trxId = $_GET['trxId'];
+
+echo '<div>result: '.$result.'</div>';
+echo '<div>token: '.$token.'</div>';
+echo '<div>trackId: '.$trackId.'</div>';
+echo '<div style="margin-bottom:50px;">trxId: '.$trxId.'</div>';
+
+try {
+    $curl = curl_init();
+    $configVars = parse_ini_file('config.ini', TRUE);
+    $domain = $configVars['basic']['domain'];
+    $directMethod = $_COOKIE[$trackId];
+    $sk = $configVars['basic']['sk_'.$directMethod];
+    
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $domain.'/payment/v1/set/'.$token,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: '.$sk
+        ),
+    ));
+    
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    echo $response;
+} catch (\Throwable $th) {
+    echo '<div>RESPONSE ERROR</div>';
+}
 ?>
+
+</html>
