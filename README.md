@@ -7,11 +7,9 @@ PHP 결제 샘플
 
 ## 결제 순서
 
-### 1. 결제하기 버튼을 누르면 [index.php] 화면에서 결제 정보(JSON)를 생성하여 [checkout.php]으로 ajax 요청을 보냅니다.
+### 1. [index.php] 결제하기 버튼을 누르면, 결제 정보(JSON)를 [checkout.php]으로 ajax 요청을 보냅니다.
 
-
-### 2. backend [checkout.php] 에서 Checkout API 요청을 보냅니다.
-
+### 2. [checkout.php] 에서 Checkout API 요청을 보냅니다.
 
 ### 3. Checkout API 응답을 받았고 결과가 성공이라면, 응답 데이터에 포함된 link 를 [index.php] 에게 반환합니다.
 
