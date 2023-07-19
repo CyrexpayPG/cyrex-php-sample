@@ -1,12 +1,14 @@
 <?php
-echo 'into failure! ';
+echo '<h1>[가맹점] 결제 실패 페이지</h1>';
 $result = $_GET['result'];
-echo $result;
 $trackId = $_GET['trackId'];
-echo $trackId;
-$accToken = $_GET['token'];
-echo $accToken;
+$token = $_GET['token'];
 $trxId = $_GET['trxId'];
-echo $trxId;
+
+echo '<div>result: '.$result.'</div>';
+echo '<div>token: '.$token.'</div>';
+echo '<div>trackId: '.$trackId.'</div>';
+echo '<div style="margin-bottom:50px;">trxId: '.$trxId.'</div>';
+
 
 ?>
