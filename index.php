@@ -2,16 +2,28 @@
 <html>
 <head>
     <title>Cyrexpay payment</title>
+    <style>
+        button {
+            border: blue solid 1px;
+            border-radius: 3px;
+            background-color: blue;
+            color: white;
+            padding: 5px 15px;
+        }
+    </style>
 </head>
 
 <body>
-    <button onClick="checkout('culturecash')">상품권</button>
-    <button onClick="checkout('microcb')">휴대폰결제</button>
-    
     <div style="display:none;">
         <div>상품금액: <input id="amount-tag" value="1004"></input></div>
         <div>주문번호: <span id="trackId-tag"></span></div>
     </div>
+    <form name="options" >
+        <div style="padding:10px;"><input type="radio" name="directMethod" value="culturecash" checked>상품권결제</div>
+        <div style="padding:10px;"><input type="radio" name="directMethod" value="microcb">휴대폰결제</div>
+    </form>
+    <div style="padding:10px;"><button onClick="checkout()">결제하기</button></div>
+    
     <div style="margin-top:100px;">
         <h3 id="request-title"></h3>
         <textarea id="request-tag" cols="100" rows="40">
@@ -50,13 +62,13 @@
             "udf3": "유저 세팅값 3번째"
         }
         
-        async function checkout(directMethod) {
-            request.directMethod = directMethod;
+        async function checkout() {
+            request.directMethod = document.forms.options.directMethod.value;
             request.amount = Number(document.getElementById('amount-tag').value);
             request.products[0].price = request.amount;
             
             await showRequest(request, '현재 생성된 결제창을 요청하는 데이터 입니다.');
-            alert('요청 전문 확인을 위해 진행을 일시 정지했습니다.\n전문 데이터 중 일부는 서버에서 설정됩니다.');
+            // alert('요청 전문 확인을 위해 진행을 일시 정지했습니다.\n전문 데이터 중 일부는 서버에서 설정됩니다.');
             // 가맹점 Backend 서버와 통신합니다.
             const responseFeatch = await fetch('./checkout.php', {
                 method: 'POST',
@@ -73,7 +85,7 @@
             }
             
             await showRequest(response, '현재 응답받은 데이터 입니다.');
-            alert('응답 전문 확인을 위해 진행을 일시 정지했습니다.');
+            // alert('응답 전문 확인을 위해 진행을 일시 정지했습니다.');
             
             if(response.result.resultCd == '0000') {
                 window.location.href = response.link;
