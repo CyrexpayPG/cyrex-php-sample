@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cultureland</title>
+    <title>Cyrexpay payment</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     <script>
         const trackId = 'TRX-' + new Date().getTime();
         document.getElementById('trackId-tag').innerText = trackId;
-
+        
         var request = {
             "trackId": trackId,
             "directMethod": "",
